@@ -40,10 +40,22 @@ export const getComment = createPromiseThunk(
     commentsApi.getComment
 );
 
-export const pageComments = createPromiseThunk(
-    PAGE_COMMNETS,
-    commentsApi.pageComments
-);
+export const pageComments = (num) => async (dispatch) => {
+    dispatch({ type: PAGE_COMMNETS });
+    try {
+        const payload = await commentsApi.pageComments(num);
+        dispatch({
+            type: PAGE_COMMNETS_SUCCESS,
+            payload,
+            currentPage: num,
+        });
+    } catch (e) {
+        dispatch({
+            type: PAGE_COMMNETS_ERROR,
+            error: e,
+        });
+    }
+};
 
 export const addComment = createPromiseThunk(
     ADD_COMMENT,
@@ -65,6 +77,7 @@ export const initialState = {
     totalComments: reducerUtils.initial(),
     comments: reducerUtils.initial(),
     comment: reducerUtils.initial(),
+    currentPage: 1,
 };
 
 const getTotalCommentsReducer = handleAsyncActions(
@@ -72,7 +85,6 @@ const getTotalCommentsReducer = handleAsyncActions(
     "totalComments"
 );
 const getCommentReducer = handleAsyncActions(GET_COMMENT, "comment");
-const getPageCommentsReducer = handleAsyncActions(PAGE_COMMNETS, "comments");
 const addCommentReducer = handleAsyncActions(ADD_COMMENT, "totalComments");
 const removeCommentReducer = handleAsyncActions(
     REMOVE_COMMENT,
@@ -92,9 +104,35 @@ export default function comments(state = initialState, action) {
             return getCommentReducer(state, action);
 
         case PAGE_COMMNETS:
+            return {
+                ...state,
+                comments: {
+                    loading: true,
+                    data: null,
+                    error: null,
+                },
+                currentPage: action.currentPage,
+            };
         case PAGE_COMMNETS_SUCCESS:
+            return {
+                ...state,
+                comments: {
+                    loading: false,
+                    data: action.payload,
+                    error: null,
+                },
+                currentPage: action.currentPage,
+            };
         case PAGE_COMMNETS_ERROR:
-            return getPageCommentsReducer(state, action);
+            return {
+                ...state,
+                comments: {
+                    loading: false,
+                    data: null,
+                    error: action.error,
+                },
+                currentPage: action.currentPage,
+            };
 
         case ADD_COMMENT:
         case ADD_COMMENT_SUCCESS:

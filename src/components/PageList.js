@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const PageListStyle = styled.div`
@@ -16,25 +16,25 @@ const Page = styled.button`
     background-color: white;
     cursor: pointer;
 
-    &.active {
-        background-color: gray;
+    ${({ active }) =>
+        active &&
+        `
+        background: gray;
         color: #fff;
-    }
+  `}
 
     margin-right: 3px;
 `;
 
-function PageList({ totalComments, onPage }) {
+function PageList({ totalComments, onPage, currentPage }) {
     const pageArray = [];
 
     for (let i = 1; i <= Math.ceil(totalComments / 4); i++) {
         pageArray.push(i);
     }
-    const [current, setCurrent] = useState(1);
 
     const loadNumber = (num) => {
         onPage(num);
-        setCurrent(num);
     };
 
     return (
@@ -43,7 +43,7 @@ function PageList({ totalComments, onPage }) {
                 <Page
                     key={num}
                     onClick={() => loadNumber(num)}
-                    className={current === num && "active"}
+                    active={currentPage === num}
                 >
                     {num}
                 </Page>

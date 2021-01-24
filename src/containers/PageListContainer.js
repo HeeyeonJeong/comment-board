@@ -7,6 +7,8 @@ function PageListContainer() {
     const { loading, data, error } = useSelector(
         (state) => state.comments.totalComments
     );
+    const currentPage = useSelector((state) => state.comments.currentPage);
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -19,7 +21,13 @@ function PageListContainer() {
     if (!data) return null;
     if (error) return <div>에러 발생</div>;
 
-    return <PageList totalComments={data && data.length} onPage={onPage} />;
+    return (
+        <PageList
+            totalComments={data && data.length}
+            onPage={onPage}
+            currentPage={currentPage}
+        />
+    );
 }
 
 export default PageListContainer;

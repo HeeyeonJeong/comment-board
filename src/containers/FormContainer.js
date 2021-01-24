@@ -7,6 +7,7 @@ function FormContainer() {
     const { loading, data, error } = useSelector(
         (state) => state.comments.comment
     );
+    const currentPage = useSelector((state) => state.comments.currentPage);
 
     const dispatch = useDispatch();
 
@@ -18,7 +19,12 @@ function FormContainer() {
     if (error) return <div>에러 발생</div>;
 
     return (
-        <Form onCommentLoad={data} onCreate={onCreate} onUpdate={onUpdate} />
+        <Form
+            onCommentLoad={data}
+            onCreate={onCreate}
+            onUpdate={onUpdate}
+            currentPage={currentPage}
+        />
     );
 }
 

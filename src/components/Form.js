@@ -29,7 +29,7 @@ const FormStyle = styled.div`
     }
 `;
 
-function Form({ onCreate, onUpdate, onCommentLoad }) {
+function Form({ onCreate, onUpdate, onCommentLoad, currentPage }) {
     const dispatch = useDispatch();
 
     const [inputs, setInputs] = useState({
@@ -67,7 +67,7 @@ function Form({ onCreate, onUpdate, onCommentLoad }) {
         } else {
             onUpdate(inputs).then(() => {
                 dispatch(getComments());
-                dispatch(pageComments());
+                dispatch(pageComments(currentPage));
             });
         }
         clearInputs();
