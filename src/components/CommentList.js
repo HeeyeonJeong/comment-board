@@ -1,80 +1,72 @@
-import React from 'react';
+import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { getComments, pageComments } from "../store/modules/comments";
 
 const Comment = styled.div`
     padding: 7px 10px;
-    text-align : left;
+    text-align: left;
 
-	& > img {
-        vertical-align : middle;
-        margin-right : 10px;
+    & > img {
+        vertical-align: middle;
+        margin-right: 10px;
         border-radius: 50%;
-        width : 50px;
-        height : 50px;
-	}
+        width: 50px;
+        height: 50px;
+    }
 `;
 
-
 const CreatedAt = styled.div`
-    float : right;
-    vertical-align : middle;
+    float: right;
+    vertical-align: middle;
 `;
 
 const Content = styled.div`
-    margin : 10px 0;
+    margin: 10px 0;
 `;
 
-const Button = styled.div`
-    text-align : right;
-    margin : 10px 0;
-    & > a {
-        margin-right : 10px;
+const Buttons = styled.div`
+    text-align: right;
+    margin: 10px 0;
+    & > button {
+        margin-right: 10px;
         padding: 0.375rem 0.75rem;
         border-radius: 0.25rem;
+        background-color: white;
         border: 1px solid lightgray;
-        cursor : pointer; 
-	}
+        cursor: pointer;
+    }
 `;
 
-// 임시 데이터 입니다. 코드 작성시 data 부분을 지워주세요
-const data = [{
-    "id": 1,
-    "profile_url": "https://picsum.photos/id/1/50/50",
-    "author": "abc_1",
-    "content": "UI 테스트는 어떻게 진행하나요",
-    "createdAt": "2020-05-01"
-}];
+function CommentList({ comments, onRemove, onUpdateComment }) {
+    const dispatch = useDispatch();
 
-function CommentList(){
-    return (
-        data.map( (comment, key) => 
+    const handleComment = (comment) => {
+        onUpdateComment(comment.id);
+    };
 
-        <Comment key={key}>
-            
+    const handleRemove = (comment) => {
+        if (window.confirm("삭제하시겠습니까?")) {
+            onRemove(comment).then(() => {
+                dispatch(getComments());
+                dispatch(pageComments(1));
+            });
+        }
+    };
+
+    return comments.map((comment) => (
+        <Comment key={comment.id}>
             <img src={comment.profile_url} alt="" />
-            
             {comment.author}
-            
-
-            <CreatedAt>
-                {comment.createdAt}
-            </CreatedAt>
-            
-            <Content>
-                {comment.content}
-            </Content>
-            
-
-            <Button>
-                <a>수정</a>
-                <a>삭제</a>
-            </Button>
-
+            <CreatedAt>{comment.createdAt}</CreatedAt>
+            <Content>{comment.content}</Content>
+            <Buttons>
+                <button onClick={() => handleComment(comment)}>수정</button>
+                <button onClick={() => handleRemove(comment)}>삭제</button>
+            </Buttons>
             <hr />
         </Comment>
-        
-        )
-    )
+    ));
 }
 
 export default CommentList;
