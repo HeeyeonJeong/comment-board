@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { getComments, pageComments } from "../store/modules/comments";
@@ -32,12 +32,16 @@ const FormStyle = styled.div`
 function Form({ onCreate, onUpdate, onCommentLoad, currentPage }) {
     const dispatch = useDispatch();
 
-    const [inputs, setInputs] = useState({
-        profile_url: "",
-        author: "",
-        content: "",
-        createdAt: "",
-    });
+    const [inputs, setInputs] = useState(
+        onCommentLoad
+            ? onCommentLoad
+            : {
+                  profile_url: "",
+                  author: "",
+                  content: "",
+                  createdAt: "",
+              }
+    );
 
     const { profile_url, author, content, createdAt } = inputs;
 
@@ -47,14 +51,6 @@ function Form({ onCreate, onUpdate, onCommentLoad, currentPage }) {
 
     const onChange = (e) => {
         setInputs({ ...inputs, [e.target.name]: e.target.value });
-    };
-
-    useEffect(() => {
-        loadComment();
-    }, []);
-
-    const loadComment = () => {
-        setInputs(onCommentLoad);
     };
 
     const onSubmit = (e) => {
