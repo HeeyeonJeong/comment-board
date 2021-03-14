@@ -12,7 +12,7 @@ export const getComment = async (id) => {
 
 export const pageComments = async (num) => {
     const reponse = await axios.get(
-        `http://localhost:4000/comments?_page=${num}&_limit=4&_order=desc&_sort=id`
+        `http://localhost:4000/comments?_page=${num}&_limit=3&_order=desc&_sort=id`
     );
     return reponse.data;
 };

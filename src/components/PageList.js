@@ -29,7 +29,7 @@ const Page = styled.button`
 function PageList({ totalComments, onPage, currentPage }) {
     const pageArray = [];
 
-    for (let i = 1; i <= Math.ceil(totalComments / 4); i++) {
+    for (let i = 1; i <= Math.ceil(totalComments / 3); i++) {
         pageArray.push(i);
     }
 

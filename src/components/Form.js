@@ -4,11 +4,6 @@ import styled from "styled-components";
 import { getComments, pageComments } from "../store/modules/comments";
 
 const FormStyle = styled.div`
-    & > form {
-        padding: 0 10px;
-        margin-bottom: 50px;
-    }
-
     & > form > textarea {
         padding: 5px 1%;
         width: 98%;
@@ -101,7 +96,7 @@ function Form({ onCreate, onUpdate, onCommentLoad, currentPage }) {
                 <input
                     type="text"
                     name="createdAt"
-                    placeholder="2020-05-30"
+                    placeholder="2020-02-01"
                     required
                     onChange={onChange}
                     value={createdAt || ""}
