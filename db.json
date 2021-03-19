@@ -1,0 +1,74 @@
+{
+  "comments": [
+    {
+      "id": 1,
+      "profile_url": "https://picsum.photos/id/1/50/50",
+      "author": "abc_1",
+      "content": "댓글",
+      "createdAt": "2021-02-01"
+    },
+    {
+      "id": 2,
+      "profile_url": "https://picsum.photos/id/2/50/50",
+      "author": "abc_2",
+      "content": "테스트 12345",
+      "createdAt": "2021-02-01"
+    },
+    {
+      "id": 3,
+      "profile_url": "https://picsum.photos/id/3/50/50",
+      "author": "abc_3",
+      "content": "테스트 1234",
+      "createdAt": "2021-02-01"
+    },
+    {
+      "id": 4,
+      "profile_url": "https://picsum.photos/id/4/50/50",
+      "author": "abc_4",
+      "content": "테스트 123",
+      "createdAt": "2021-02-01"
+    },
+    {
+      "id": 5,
+      "profile_url": "https://picsum.photos/id/5/50/50",
+      "author": "abc_5",
+      "content": "안녕하세요.",
+      "createdAt": "2021-02-01"
+    },
+    {
+      "id": 7,
+      "profile_url": "https://picsum.photos/id/7/50/50",
+      "author": "123",
+      "content": "테스트3",
+      "createdAt": "2021-02-01"
+    },
+    {
+      "id": 8,
+      "profile_url": "https://picsum.photos/id/8/50/50",
+      "author": "abc_8",
+      "content": "댓글 테스트2",
+      "createdAt": "2021-02-01"
+    },
+    {
+      "id": 9,
+      "profile_url": "https://picsum.photos/id/9/50/50",
+      "author": "abc_9",
+      "content": "댓글 테스트1",
+      "createdAt": "2021-02-01"
+    },
+    {
+      "author": "희연",
+      "content": "테스트 중 입니다.",
+      "createdAt": "2021-02-01",
+      "profile_url": "https://picsum.photos/id/3/50/50",
+      "id": 10
+    },
+    {
+      "profile_url": "https://picsum.photos/id/3/50/50",
+      "author": "희연",
+      "content": "댓글 테스트",
+      "createdAt": "2021-02-01",
+      "id": 11
+    }
+  ]
+}
